@@ -1,0 +1,58 @@
+// compileOnSave
+// variables
+$c-custom: #3c3c3c;
+
+//styles to all elements
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+//styles to body
+body {
+  height: 100vh;
+  font-family: 'SlimJoe', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $c-custom;
+}
+//-----------------------------------------
+//custom styles
+.slider {
+  font-size: 0;
+  text-align: center;
+  height: 500px;
+  img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+//-----------------------------------------
+//fonts
+@font-face {
+  font-family: 'BigJohn';
+  src: url('../fonts/big_john-webfont.woff2') format('woff2'),
+       url('../fonts/big_john-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SlimJoe';
+  src: url('../fonts/slim_joe-webfont.woff2') format('woff2'),
+       url('../fonts/slim_joe-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+//bulma
+@import "bulma/bulma.sass";
+//helper
+// @import "helpers/media-queries";
+// sections
+//@import "sections/main";
+// blocks
+// @import "blocks/box";
