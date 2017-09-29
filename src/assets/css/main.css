@@ -13,18 +13,21 @@ body {
   color: #3c3c3c;
 }
 
-.slider {
-  font-size: 0;
-  text-align: center;
-  height: 500px;
+.slider, .media-content {
+  max-width: 1080px;
+  height: auto;
+  margin: 0 auto;
+  padding: 15px;
 }
 
-.slider img {
-  display: inline-block;
+.slider-item, .media-content-item {
+  display: block;
+  margin: 0 auto;
   width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
+}
+
+.field {
+  padding: 10px;
 }
 
 @font-face {
