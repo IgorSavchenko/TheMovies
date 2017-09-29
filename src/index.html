@@ -18,7 +18,7 @@
 
 <body>
   <!-- navbar -->
-  <nav class="navbar is-dark" style="align-items: center;">
+  <nav class="navbar is-dark" style="position: fixed; align-items: center;">
 
     <div class="navbar-brand">
       <a class="navbar-item" href="https://www.themoviedb.org/">
@@ -44,7 +44,7 @@
       <a class="navbar-item" href="#">
         Coming soon
       </a>
-      <a class="navbar-item" href="#">
+      <a class="navbar-item" href="#slider">
         Watch now
       </a>
       <a class="navbar-item" href="#">
@@ -52,12 +52,12 @@
       </a>
     </div>
 
-    <div class="field is-grouped">
-      <p class="control is-expanded">
+    <div class="field has-addons has-addons-centered">
+      <p class="control is-expanded" style="width: 250px;">
         <input class="input" type="text" placeholder="Find a movie">
       </p>
       <p class="control">
-        <a class="button is-success">
+        <a class="button is-success" style="background: rgba(0, 212, 116, 1);">
           <i class="fa fa-search"></i>
         </a>
       </p>
@@ -65,129 +65,119 @@
 
   </nav>
 
-  <section class="hero is-medium is-warning is-bold has-text-centered">
+  <section class="hero is-large is-bold has-text-centered">
     <div class="hero-body">
       <div class="container">
         <p class="title">
           THE MOVIES
         </p>
         <p class="subtitle">
-          Powered by TMDb
+          Powered by THE MOVIE Db
         </p>
       </div>
     </div>
+    <a href="#slider" class="hero-link"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
   </section>
 
-  <div class="slider">
-    <img class="slider-item" alt="A few facts about smoking in the movies" src="https://truthinitiative.org/sites/default/files/SmokingInMovies_Facts.gif">
+<div class="container">
+  <div id="slider" class="slider">
+    <img class="image slider-item" alt="slide1" src="assets/img/ahmet-yalcinkaya-84327.jpg">
+    <img class="image slider-item" alt="slide2" src="assets/img/florian-klauer-415.jpg">
+    <img class="image slider-item" alt="slide3" src="assets/img/mat-weller-86006.jpg">
+    <img class="image slider-item" alt="slide4" src="assets/img/michael-haslim-21021.jpg">
   </div>
+  <div class="slider-navigation">
+    <!-- auto rendering content by main.js -->
+    <!-- <button class="slider-button slider-button--active"></button> -->
+  </div>
+</div>
 
   <section class="media-content columns" style="margin:0 auto;">
   <!-- 1 -->
-    <div class="card column is-one-quarter">
+    <div class="card column is-6">
       <div class="card-image">
         <figure class="image is-4by3">
-          <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          <a href="http://itthemovie.com/" class="image-link"><img style="object-fit: contain;" src="https://image.tmdb.org/t/p/w640/zSo9i3K3ZC1r35XaTyrh8SkFxRU.jpg" alt="Placeholder image"></a>
         </figure>
       </div>
       <div class="card-content">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="http://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4">John Smith</p>
-            <p class="subtitle is-6">@johnsmith</p>
+          <div class="media-content" style="z-index: 1;">
+            <p class="title is-6">It</p>
+            <p class="subtitle is-6">Raiting: 75%</p>
           </div>
         </div>
         <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-          <a href="#">#css</a> <a href="#">#responsive</a>
+          Когда в городке Дерри, штат Мэн, начинают пропадать дети, несколько ребят сталкиваются со своими величайшими страхами и вынуждены помериться силами со злобным клоуном Пеннивайзом, чьи проявления жестокости и список жертв уходят в глубь веков.
           <br>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          <a href="http://itthemovie.com/">Home page</a>
+          <br>
+          Release: <time datetime="2016-1-1">5 Sep 2017</time>
         </div>
       </div>
     </div>
     <!-- 2 -->
-    <div class="card column is-one-quarter">
+    <div class="card column is-6">
       <div class="card-image">
         <figure class="image is-4by3">
-          <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          <a href="http://www.kinopoisk.ru/film/258687/" class="image-link"><img style="object-fit: contain;" src="https://image.tmdb.org/t/p/w640/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg" alt="Placeholder image"></a>
         </figure>
       </div>
       <div class="card-content">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="http://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4">John Smith</p>
-            <p class="subtitle is-6">@johnsmith</p>
+          <div class="media-content" style="z-index: 1;">
+            <p class="title is-6">Interstellar</p>
+            <p class="subtitle is-6">Raiting: 81%</p>
           </div>
         </div>
         <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-          <a href="#">#css</a> <a href="#">#responsive</a>
+          Наше время на Земле подошло к концу, команда исследователей берет на себя самую важную миссию в истории человечества; путешествуя за пределами нашей галактики, чтобы узнать есть ли у человечества будущее среди звезд.
           <br>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          <a href="http://www.kinopoisk.ru/film/258687/">Home page</a>
+          <br>
+          Release: <time datetime="2016-1-1">5 Nov 2014</time>
         </div>
       </div>
     </div>
     <!-- 3 -->
-    <div class="card column is-one-quarter">
+    <div class="card column is-6">
       <div class="card-image">
         <figure class="image is-4by3">
-          <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          <a href="http://inceptionmovie.warnerbros.com/" class="image-link"><img style="object-fit: contain;" src="https://image.tmdb.org/t/p/w640/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg" alt="Placeholder image"></a>
         </figure>
       </div>
       <div class="card-content">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="http://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4">John Smith</p>
-            <p class="subtitle is-6">@johnsmith</p>
+          <div class="media-content" style="z-index: 1;">
+            <p class="title is-6">Inception</p>
+            <p class="subtitle is-6">Raiting: 81%</p>
           </div>
         </div>
         <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-          <a href="#">#css</a> <a href="#">#responsive</a>
+          Дом Кобб - талантливый вор, лучший из лучших в опасном искусстве извлечения: он крадет ценные секреты из глубин подсознания во время сна, когда человеческий разум наиболее уязвим. Редкие способности Кобба сделали его ценным игроком в привычном к предательству мире промышленного шпионажа, но они же превратили его в извечного беглеца и лишили всего, что он когда-либо любил.
           <br>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          <a href="http://inceptionmovie.warnerbros.com/">Home page</a>
+          <br>
+          Release: <time datetime="2016-1-1">16 Jul 2010</time>
         </div>
       </div>
     </div>
     <!-- 4 -->
-    <div class="card column is-one-quarter">
+    <div class="card column is-6">
       <div class="card-image">
         <figure class="image is-4by3">
-          <img src="http://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+          <a href="http://marvel.com/avengers_movie/" class="image-link"><img style="object-fit: contain;" src="https://image.tmdb.org/t/p/w640/cezWGskPY5x7GaglTTRN4Fugfb8.jpg" alt="Placeholder image"></a>
         </figure>
       </div>
       <div class="card-content">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="http://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4">John Smith</p>
-            <p class="subtitle is-6">@johnsmith</p>
+          <div class="media-content" style="z-index: 1;">
+            <p class="title is-6">The Avengers</p>
+            <p class="subtitle is-6">Raiting: 74%</p>
           </div>
         </div>
         <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-          <a href="#">#css</a> <a href="#">#responsive</a>
+          Локи, сводный брат Тора, возвращается, и в этот раз он не один. Земля на грани порабощения, и только лучшие из лучших могут спасти человечество. Ник Фьюри, глава международной организации Щ. И. Т., собирает выдающихся поборников справедливости и добра, чтобы отразить атаку. Под предводительством Капитана Америки Железный Человек, Тор, Невероятный Халк, Хоукай и Чёрная Вдова вступают в войну с захватчиком.
           <br>
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          <a href="http://marvel.com/avengers_movie/">Home page</a>
+          <br>
+          Release: <time datetime="2016-1-1">4 May 2012</time>
         </div>
       </div>
     </div>
@@ -209,6 +199,7 @@
     </div>
   </footer>
   <!-- <div><img src="assets/img/movie-296751_960_720.png" alt=""></div> -->
+  <!-- script -->
   <script src="assets/js/main.min.js"></script>
 </body>
 
