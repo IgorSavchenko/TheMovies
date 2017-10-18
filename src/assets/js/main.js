@@ -116,10 +116,34 @@ function initModals() {
   document.querySelectorAll('[data-modal-open], [data-modal-close]').forEach(function(item) {
     item.addEventListener('click', function(event) {
       event.preventDefault();
+      $('.modal-image').attr('src', ``);
+      if (item.dataset['modalOpen']) {
+        console.log(item.dataset['id']);
+        searchMovieById(item.dataset['id']);
+      }
       let key = item.dataset['modalOpen'] || item.dataset['modalClose'];
       document.querySelector('[data-modal='+key+']').classList.toggle(ACTIVE_CLASS);
     });
   });
+}
+
+//search movie by id
+function searchMovieById(id) {
+  axios.get(`/movie/${id}?api_key=${API_KEY}&language=en-US`)
+  .then(function (response) {
+    console.log(response.data);
+    let file_path = response.data.poster_path;
+    let imgURL = BASE_IMG_URL + IMG_SIZE_M + file_path;
+    $('.modal-image').attr('src', `${imgURL}`);
+    $('.modal-title').text(`${response.data.original_title}`);
+    $('.modal-company').text(`Production company: ${response.data.production_companies[0]}`);
+    $('.modal-overwiew').text(`${response.data.overview}`);
+    $('.modal-budget').text(`Budget: ${response.data.budget} $`);
+    $('.modal-duration').text(`Duration: ${response.data.runtime} min`);
+    $('.modal-raiting').text(`Raiting: ${response.data.vote_average*10}%`);
+    $('.modal-reference').attr('href', `${response.data.homepage}`);
+  })
+  .catch(err => console.log(err));
 }
 
 // search movies by entered name
@@ -133,6 +157,7 @@ function searchMoviesByName(name) {
   axios.get(`/search/movie?api_key=${API_KEY}&query=${name}`)
   .then(function (response) {
     renderMediaContent(response.data.results);
+    initModals();
   })
   .catch(err => console.log(err));
 }
@@ -158,11 +183,11 @@ function searchMoviesByName(name) {
   }
 
   let renderCardTemplate = (id, imgURL, title, raiting, content, release) => {
-    return `<div class="column is-mobile is-half-tablet is-one-third-desktop" data-id="${id}">
+    return `<div class="column is-mobile is-half-tablet is-one-third-desktop">
       <div class="card">
         <div class="card-image">
           <figure class="image is-16by9">
-            <a href="#" data-modal-open="modal">
+            <a href="#" data-modal-open="modal" data-id="${id}">
               <img src="${imgURL}" alt="More info">
             </a>
           </figure>
@@ -179,6 +204,11 @@ function searchMoviesByName(name) {
     </div>`;
   }
 
-
+  // document.querySelectorAll('[data-modal-open]').forEach(function(item) {
+  //   item.addEventListener('click', function(event) {
+  //     event.preventDefault();
+  //     console.log(item.dataset['id']);
+  //   });
+  // });
 
 //=====================================================================

@@ -157,10 +157,11 @@ body {
   }
   & .image .modal-image {
     width: 40%;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     object-fit: contain;
     @include tablet-min {
       width: 100%;
+      max-height: 600px;
     }
   }
   &-content {
@@ -175,7 +176,7 @@ body {
   }
   &-title {
     font-family: 'BigJohn';
-    font-size: 20px;
+    font-size: 18px;
   }
   &-overwiew {
     font-family: 'Raleway';
@@ -201,16 +202,17 @@ body {
     & .media-left {
       flex-shrink: 0.9;
       @include tablet-min {
-        flex-shrink: 0.75;
+        flex-shrink: 0.8;
       }
       @include desktop-min {
-        flex-shrink: 0.6;
+        flex-shrink: 0.9;
       }
     }
   }
   & .level-item {
     display: inline-block;
     margin-right: 0.75rem;
+    margin-bottom: 0;
     transition: all 0.5s ease;
     @include tablet-landscape-min {
       display: flex;

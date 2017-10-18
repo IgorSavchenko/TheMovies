@@ -9329,13 +9329,14 @@ body {
 
 .modal .image .modal-image {
   width: 40%;
-  margin: 0 auto;
+  margin: 0 auto 10px;
   object-fit: contain;
 }
 
 @media (min-width: 768px) {
   .modal .image .modal-image {
     width: 100%;
+    max-height: 600px;
   }
 }
 
@@ -9355,7 +9356,7 @@ body {
 
 .modal-title {
   font-family: 'BigJohn';
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .modal-overwiew {
@@ -9394,19 +9395,20 @@ body {
 
 @media (min-width: 768px) {
   .modal .box .media-left {
-    flex-shrink: 0.75;
+    flex-shrink: 0.8;
   }
 }
 
 @media (min-width: 1200px) {
   .modal .box .media-left {
-    flex-shrink: 0.6;
+    flex-shrink: 0.9;
   }
 }
 
 .modal .level-item {
   display: inline-block;
   margin-right: 0.75rem;
+  margin-bottom: 0;
   transition: all 0.5s ease;
 }
 
