@@ -112,17 +112,23 @@ body {
 .card {
   color: $c-text;
   transition: all 0.5s ease;
+  // overflow: hidden;
   &:hover {
     transform: scale(1.02);
     box-shadow: $c-text 1px 1px 15px 5px;
+    & img {
+      transform: scale(1.2);
+    }
   }
   &-image {
     // padding: 15px;
     // background: url("../img/TheMDB-square.png") center center no-repeat;
     // background-size: width: 200px; high: 300px;
+    overflow: hidden;
   }
   & img {
     object-fit: cover;
+    transition: transform 5s ease;
   }
   & .title {
     font-family: 'BigJohn';
