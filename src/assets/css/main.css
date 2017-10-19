@@ -9338,7 +9338,7 @@ body {
   line-height: 3rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .hero .title {
     margin-top: 0;
   }
@@ -9453,7 +9453,7 @@ body {
 .modal-content {
   width: 560px;
   max-height: calc(100vh - 20px);
-  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 768px) {
@@ -9467,7 +9467,7 @@ body {
 .modal .content {
   font-family: 'Raleway';
   font-weight: 300;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -9478,7 +9478,7 @@ body {
 
 .modal-title {
   font-family: 'BigJohn';
-  font-size: 14px;
+  font-size: 16px;
 }
 
 @media (min-width: 768px) {
@@ -9491,7 +9491,7 @@ body {
   font-family: 'Raleway';
   font-weight: 300;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 @media (min-width: 768px) {

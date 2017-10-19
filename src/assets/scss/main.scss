@@ -78,7 +78,7 @@ body {
     background: rgba(0, 212, 116, 1);
   }
 }
-
+//=====================================================================
 .hero {
   position: relative;
   height: 100vh;
@@ -93,7 +93,7 @@ body {
     padding-bottom: 50px;
     margin-top: 150px;
     line-height: 3rem;
-    @include tablet-min {
+    @include tablet-landscape-min {
       margin-top: 0;
     }
   }
@@ -113,12 +113,12 @@ body {
     transition: all 0.5s ease;
   }
 }
-
+//=====================================================================
 .cards {
   margin: 50px 0;
   outline: none;
 }
-
+//=====================================================================
 .card {
   width: 80%;
   margin: 0 auto;
@@ -174,7 +174,7 @@ body {
     }
   }
 }
-
+//=====================================================================
 .modal {
   &-background {
     filter: blur(10px);
@@ -191,7 +191,8 @@ body {
   &-content {
     width: 560px;
     max-height: calc(100vh - 20px);
-    overflow-y: hidden;
+    // overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
     @include tablet-min {
       width: 1024px;
       max-width: calc(100vw - 100px);
@@ -201,14 +202,14 @@ body {
   & .content {
     font-family: 'Raleway';
     font-weight: 300;
-    font-size: 12px;
+    font-size: 14px;
     @include tablet-min {
       font-size: 16px;
     }
   }
   &-title {
     font-family: 'BigJohn';
-    font-size: 14px;
+    font-size: 16px;
     @include tablet-min {
       font-size: 18px;
     }
@@ -217,7 +218,7 @@ body {
     font-family: 'Raleway';
     font-weight: 300;
     font-weight: 300;
-    font-size: 12px;
+    font-size: 14px;
     @include tablet-min {
       font-size: 16px;
     }

@@ -100,7 +100,25 @@ function initSlider() {
   }
   MY_SIEMA.addArrows();
 }
-
+//=====================================================================
+// init Masonry with element when all images in cards are Loaded
+import Masonry from 'masonry-layout';
+import imagesLoaded from 'imagesloaded';
+//create Masonry layout
+function createMasonry() {
+  let imgLoad = imagesLoaded('.columns');
+  let grid = document.querySelector('.columns');
+  imgLoad.on( 'progress', function(instance, image) {
+    //creates Masonry object from .grid
+    let msnry = new Masonry( grid, {
+      // options
+      itemSelector: ".column",
+      // columnWidth: '.grid-sizer',
+      transitionDuration: '0.3s',
+      stagger: 30
+    });
+  });
+}
 //=====================================================================
 //external database usage
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
@@ -127,6 +145,7 @@ $("#search-button").click( () => {
     let requestURL = `/search/movie?api_key=${API_KEY}&query=${title}&page=1`;
     showMediaContent(requestURL);
     initModal();
+    // createMasonry();
 });
 //=====================================================================
 //navbar menu links
@@ -155,6 +174,7 @@ $('.navbar-item').click(function(event) {
   if (requestData === 'watchNow') {return false;}
   showMediaContent(requestURL);
   initModal();
+  // createMasonry();
 });
 //=====================================================================
 //show slider content with actual movies on load
@@ -166,6 +186,7 @@ function showMediaContent(request) {
   .then(function (response) {
     renderMediaContent(response.data.results);
     initModal();
+    createMasonry();
   })
   .catch(err => console.log(err));
 }
