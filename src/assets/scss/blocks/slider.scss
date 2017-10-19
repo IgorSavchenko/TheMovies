@@ -60,16 +60,40 @@
       }
     }
   }
+  & .arrow {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    border-radius: 50%;
+    // background-color: rgba($c-light, 0.5);
+    background-color: transparent;
+    color: $c-text;
+    transition: color 0.5s ease;
+    &:hover {
+      color: $c-green;
+    }
+    &--prev {
+      left: 5px;
+    }
+    &--next {
+      right: 5px;
+    }
+  }
   &-navigation {
     position: absolute;
     bottom: 4%;
     left: 50%;
     transform: translateX(-50%);
-    display: -webkit-flex;
-    display: -ms-flex;
     display: flex;
     justify-content: center;
     align-items: center;
+    visibility: hidden;
+    @include tablet-min {
+      visibility: visible;
+    }
   }
   &-button {
     width: 10px;

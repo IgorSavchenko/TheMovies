@@ -51,7 +51,7 @@ $('a[href*="#"]')
 import Siema from 'siema';
 //initialize slider
 function initSlider() {
-  const mySiema = new Siema({
+  const MY_SIEMA = new Siema({
     selector: '.slider',
     perPage: 1,
     startIndex: 0,
@@ -61,8 +61,8 @@ function initSlider() {
     onChange: setActiveButton
   });
   // listen for keydown event
-  setInterval(() => mySiema.next(), 5000);
-  // Add a function that generates pagination to Siema
+  setInterval(() => MY_SIEMA.next(), 5000);
+  // Add a function that generates navigation buttons to Siema
   function addNavigation() {
     let length = this.innerElements.length;
     for (let i = 0; i < length; i++) {
@@ -73,7 +73,7 @@ function initSlider() {
       this.selector.nextSibling.appendChild(BTN);
     }
   }
-  // Add a function that change buttons in slider
+  // Add a function that change navigation buttons in slider
   function setActiveButton(){
     document.querySelectorAll('.slider-button').forEach((b, i) => {
       if (i == (this.currentSlide || 0)){
@@ -83,7 +83,24 @@ function initSlider() {
       }
     });
   }
+  // Add a function that generates arrow left and right buttons to Siema
+  Siema.prototype.addArrows = function() {
+    // make buttons & append them inside Siema's container
+    this.prevArrow = document.createElement('button');
+    this.nextArrow = document.createElement('button');
+    // this.prevArrow.textContent = 'previous slide';
+    this.prevArrow.classList.add('arrow', 'arrow--prev', 'fa', 'fa-lg', 'fa-chevron-left');
+    // this.nextArrow.textContent = 'next slide';
+    this.nextArrow.classList.add('arrow', 'arrow--next', 'fa', 'fa-lg', 'fa-chevron-right');
+    this.selector.appendChild(this.prevArrow);
+    this.selector.appendChild(this.nextArrow);
+    // event handlers on buttons
+    this.prevArrow.addEventListener('click', () => this.prev());
+    this.nextArrow.addEventListener('click', () => this.next());
+  }
+  MY_SIEMA.addArrows();
 }
+
 //=====================================================================
 //external database usage
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
