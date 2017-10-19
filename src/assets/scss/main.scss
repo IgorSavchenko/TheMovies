@@ -120,9 +120,17 @@ body {
 }
 
 .card {
+  width: 80%;
+  margin: 0 auto;
   color: $c-text;
   transition: all 0.5s ease;
-  // overflow: hidden;
+  overflow: hidden;
+  @include tablet-min {
+    width: 90%;
+  }
+  @include tablet-landscape-min {
+    width: 100%;
+  }
   &:hover {
     transform: scale(1.02);
     box-shadow: $c-text 1px 1px 15px 5px;
@@ -193,16 +201,26 @@ body {
   & .content {
     font-family: 'Raleway';
     font-weight: 300;
-    font-size: 16px;
+    font-size: 12px;
+    @include tablet-min {
+      font-size: 16px;
+    }
   }
   &-title {
     font-family: 'BigJohn';
-    font-size: 18px;
+    font-size: 14px;
+    @include tablet-min {
+      font-size: 18px;
+    }
   }
   &-overwiew {
     font-family: 'Raleway';
     font-weight: 300;
-    font-size: 16px;
+    font-weight: 300;
+    font-size: 12px;
+    @include tablet-min {
+      font-size: 16px;
+    }
   }
   &-close {
     position: absolute;

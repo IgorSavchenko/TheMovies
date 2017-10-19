@@ -1,50 +1,4 @@
 //=====================================================================
-// siema slider
-import Siema from 'siema';
-//default function
-function onInitCallback() {
-  console.log('Siema initialised bro :)');
-}
-//default function
-function onChangeCallback() {
-  console.log(`The index of current slide is: ${this.currentSlide}`);
-}
-//init slider
-function initSlider() {
-  const mySiema = new Siema({
-    selector: '.slider',
-    perPage: 1,
-    startIndex: 0,
-    loop: true,
-    draggable: true,
-    onInit: addNavigation,
-    onChange: setActiveButton
-  });
-  // listen for keydown event
-  setInterval(() => mySiema.next(), 5000);
-  // Add a function that generates pagination to Siema
-  function addNavigation() {
-    let length = this.innerElements.length;
-    for (let i = 0; i < length; i++) {
-      const BTN = document.createElement('button');
-      BTN.classList.add('slider-button');
-      if (i == 0) BTN.classList.add('slider-button--active');
-      BTN.addEventListener('click', () => this.goTo(i));
-      this.selector.nextSibling.appendChild(BTN);
-    }
-  }
-  // Add a function that change buttons in slider
-  function setActiveButton(){
-    document.querySelectorAll('.slider-button').forEach((b, i) => {
-      if (i == (this.currentSlide || 0)){
-        b.classList.add("slider-button--active");
-      } else {
-        b.classList.remove("slider-button--active");
-      }
-    });
-  }
-}
-//=====================================================================
 //navigation menu open/close
 const ACTIVE_CLASS = 'is-active';
 const HAMBURGER = $('.navbar-burger');
@@ -93,6 +47,44 @@ $('a[href*="#"]')
     }
   });
 //=====================================================================
+// siema slider
+import Siema from 'siema';
+//initialize slider
+function initSlider() {
+  const mySiema = new Siema({
+    selector: '.slider',
+    perPage: 1,
+    startIndex: 0,
+    loop: true,
+    draggable: true,
+    onInit: addNavigation,
+    onChange: setActiveButton
+  });
+  // listen for keydown event
+  setInterval(() => mySiema.next(), 5000);
+  // Add a function that generates pagination to Siema
+  function addNavigation() {
+    let length = this.innerElements.length;
+    for (let i = 0; i < length; i++) {
+      const BTN = document.createElement('button');
+      BTN.classList.add('slider-button');
+      if (i == 0) BTN.classList.add('slider-button--active');
+      BTN.addEventListener('click', () => this.goTo(i));
+      this.selector.nextSibling.appendChild(BTN);
+    }
+  }
+  // Add a function that change buttons in slider
+  function setActiveButton(){
+    document.querySelectorAll('.slider-button').forEach((b, i) => {
+      if (i == (this.currentSlide || 0)){
+        b.classList.add("slider-button--active");
+      } else {
+        b.classList.remove("slider-button--active");
+      }
+    });
+  }
+}
+//=====================================================================
 //external database usage
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
 const API_KEY = 'b38536f32716ab63ab8de5cb6ef96724';
@@ -112,30 +104,79 @@ axios.get(`/configuration?api_key=${API_KEY}`)
   })
   .catch(err => console.log(err));
 //=====================================================================
-showActualMovies();
+// search movies by entered title
+$("#search-button").click( () => {
+    let title = $("#search-input").val().replace(/ /g, '+');
+    let requestURL = `/search/movie?api_key=${API_KEY}&query=${title}&page=1`;
+    showMediaContent(requestURL);
+    initModal();
+});
+//=====================================================================
+//navbar menu links
+$('.navbar-item').click(function(event) {
+  // event.preventDefault();
+  //hide menu
+  MENU.toggleClass(ACTIVE_CLASS);
+  HAMBURGER.toggleClass(ACTIVE_CLASS);
+  let requestData = $(this).data('request');
+  let requestURL;
+  //show upcoming videos
+  if (requestData === 'comingSoon') {
+    // request example: https://api.themoviedb.org/3/movie/upcoming?api_key=<<api_key>>&language=en-US&page=1
+    requestURL = `movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`;
+  }
+  //show popular videos
+  if (requestData === 'popular') {
+    // request example: https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
+    requestURL = `movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+  }
+  //show top rated videos
+  if (requestData === 'topRated') {
+    // request example: https://api.themoviedb.org/3/movie/top_rated?api_key=<<api_key>>&language=en-US&page=1
+    requestURL = `movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
+  }
+  if (requestData === 'watchNow') {return false;}
+  showMediaContent(requestURL);
+  initModal();
+});
+//=====================================================================
+//show slider content with actual movies on load
+showSliderContent();
+//=====================================================================
+//shows media content with search parameters
+function showMediaContent(request) {
+  axios.get(request)
+  .then(function (response) {
+    renderMediaContent(response.data.results);
+    initModal();
+  })
+  .catch(err => console.log(err));
+}
+//=====================================================================
 //initialize modal window and button
-function initModals() {
+function initModal() {
   document.querySelectorAll('[data-modal-open], [data-modal-close]').forEach(function(item) {
     item.addEventListener('click', function(event) {
       event.preventDefault();
       $('.modal-image').attr('src', ``);
       if (item.dataset['modalOpen']) {
         // console.log(item.dataset['id']);
-        searchMovieById(item.dataset['id']);
+        getMovieById(item.dataset['id']);
       }
       let key = item.dataset['modalOpen'] || item.dataset['modalClose'];
       document.querySelector('[data-modal='+key+']').classList.toggle(ACTIVE_CLASS);
     });
   });
 }
-
+//=====================================================================
 //search movie by id
-function searchMovieById(id) {
+function getMovieById(id) {
   axios.get(`/movie/${id}?api_key=${API_KEY}&language=en-US`)
   .then(function (response) {
     // console.log(response.data);
     let file_path = response.data.poster_path;
     let imgURL = BASE_IMG_URL + IMG_SIZE_M + file_path;
+    //creates modal window content
     $('.modal-image').attr('src', `${imgURL}`);
     $('.modal-title').text(`${response.data.original_title}`);
     if (response.data.production_companies.length > 0) {
@@ -150,67 +191,21 @@ function searchMovieById(id) {
   })
   .catch(err => console.log(err));
 }
-
-// search movies by entered name
-$("#search-button").click( () => {
-    let value = $("#search-input").val().replace(/ /g, '+');
-    // console.log(value);
-    searchMoviesByName(value);
-    initModals();
-});
-
-function searchMoviesByName(name) {
-  // request example: https://api.themoviedb.org/3/search/movie?api_key={api_key}&query=Jack+Reacher
-  axios.get(`/search/movie?api_key=${API_KEY}&query=${name}&page=1`)
-  .then(function (response) {
-    renderMediaContent(response.data.results);
-    initModals();
-  })
-  .catch(err => console.log(err));
-}
-
-function searchUpcomingMovies() {
-  // request example: https://api.themoviedb.org/3/movie/upcoming?api_key=<<api_key>>&language=en-US&page=1
-  axios.get(`movie/upcoming?api_key=${API_KEY}&language=en-US&page=1`)
-  .then(function (response) {
-    renderMediaContent(response.data.results);
-    initModals();
-  })
-  .catch(err => console.log(err));
-}
-
-function searchPopularMovies() {
-  // request example: https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=en-US&page=1
-  axios.get(`movie/popular?api_key=${API_KEY}&language=en-US&page=1`)
-  .then(function (response) {
-    renderMediaContent(response.data.results);
-    initModals();
-  })
-  .catch(err => console.log(err));
-}
-
-function searchTopRatedMovies() {
-  // request example: https://api.themoviedb.org/3/movie/top_rated?api_key=<<api_key>>&language=en-US&page=1
-  axios.get(`movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`)
-  .then(function (response) {
-    renderMediaContent(response.data.results);
-    initModals();
-  })
-  .catch(err => console.log(err));
-}
-
-function showActualMovies() {
+//=====================================================================
+//shows slider content with actual movies
+function showSliderContent() {
   // request example: https://api.themoviedb.org/3/movie/now_playing?api_key=<<api_key>>&language=en-US&page=1
   axios.get(`/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`)
   .then(function (response) {
     // console.log(response.data.results);
     renderSliderContent(response.data.results);
     initSlider();
-    initModals();
+    initModal();
   })
   .catch(err => console.log(err));
 }
-
+//=====================================================================
+//creates all slider content
 function renderSliderContent(arr) {
   let sliderHTML = '';
   let slider = $('.slider');
@@ -219,7 +214,8 @@ function renderSliderContent(arr) {
   $(arr).each(function (index, item) {
     let id = item.id;
     let file_path = item.backdrop_path;
-    let imgURL = BASE_IMG_URL + IMG_SIZE_M + file_path;
+    if (file_path === null) {return "continue"};
+    let imgURL = BASE_IMG_URL + IMG_SIZE_XL + file_path;
     let title = item.title;
     let release = item.release_date;
     // console.log(item);
@@ -227,85 +223,63 @@ function renderSliderContent(arr) {
   });
   slider.append(sliderHTML);
 }
-
+//=====================================================================
+//creates all media content
+function renderMediaContent(arr){
+  let mediaHTML = '';
+  let cards = $('.cards .columns');
+  cards.html('');
+  //render every single card content
+  $(arr).each(function (index, item) {
+    let id = item.id;
+    // let file_path = item.poster_path;
+    let file_path = item.backdrop_path;
+    let imgURL = BASE_IMG_URL + IMG_SIZE_M + file_path;
+    let title = item.title;
+    let raiting = item.vote_average*10;
+    let content = item.overview;
+    let release = item.release_date;
+    // console.log(item);
+    mediaHTML += renderCardTemplate(id, imgURL, title, raiting, content, release);
+  });
+  cards.append(mediaHTML);
+}
+//=====================================================================
+//slider-item content rendering
 let renderSliderTemplate = (id, imgURL, title, release) => {
   return `<div class="slider-item">
-    <figure class="slider-image">
-      <a href="#" data-modal-open="modal" data-id="${id}">
-        <img src="${imgURL}" alt="More info">
-      </a>
-      <figcaption class="slider-text">${title}<br>Release date: ${release}</figcaption>
-    </figure>
-  </div>`;
+            <figure class="slider-image">
+              <a href="#" data-modal-open="modal" data-id="${id}">
+                <img src="${imgURL}" alt="More info">
+              </a>
+              <figcaption class="slider-caption">
+                <h3 class="slider-title">${title}</h3>
+                <p>Release date: ${release}</p>
+              </figcaption>
+            </figure>
+          </div>`;
 }
-
-  function renderMediaContent(arr){
-    let mediaHTML = '';
-    let cards = $('.cards .columns');
-    cards.html('');
-    //render every single card content
-    $(arr).each(function (index, item) {
-      let id = item.id;
-      // let file_path = item.poster_path;
-      let file_path = item.backdrop_path;
-      let imgURL = BASE_IMG_URL + IMG_SIZE_M + file_path;
-      let title = item.title;
-      let raiting = item.vote_average*10;
-      let content = item.overview;
-      let release = item.release_date;
-      // console.log(item);
-      mediaHTML += renderCardTemplate(id, imgURL, title, raiting, content, release);
-    });
-    cards.append(mediaHTML);
-  }
-
-  let renderCardTemplate = (id, imgURL, title, raiting, content, release) => {
-    return `<div class="column is-mobile is-half-tablet is-one-third-desktop">
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-16by9">
-            <a href="#" data-modal-open="modal" data-id="${id}">
-              <img src="${imgURL}" alt="More info">
-            </a>
-          </figure>
-        </div>
-        <div class="card-content">
-          <p class="title is-6">${title}</p>
-          <p class="subtitle is-6">Raiting: ${raiting}%</p>
-          <div class="content">
-            <p>${content}</p>
-            Release: <time datetime="${release}"><em>${release}</em></time>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }
-
-//navbar menu links
-$('.navbar-item').click(function(event) {
-  // event.preventDefault();
-  let dataRequest = $(this).data('request');
-  if (dataRequest === 'comingSoon') {
-    //show upcoming videos
-    searchUpcomingMovies();
-    initModals();
-  } else
-  if (dataRequest === 'popular') {
-    //show popular videos
-    searchPopularMovies();
-    initModals();
-  } else
-  if (dataRequest === 'topRated') {
-    //show top rated videos
-    searchTopRatedMovies();
-    initModals();
-  } else
-  if (dataRequest === 'watchNow') {
-    //show actual movies in theatres
-    // showActualMovies();
-    // initModals();
-  }
-});
-
-
+//=====================================================================
+//card content rendering
+let renderCardTemplate = (id, imgURL, title, raiting, content, release) => {
+  return `<div class="column is-mobile is-half-tablet is-one-third-desktop">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-16by9">
+                  <a href="#" data-modal-open="modal" data-id="${id}">
+                    <img src="${imgURL}" alt="More info">
+                  </a>
+                </figure>
+              </div>
+              <div class="card-content">
+                <p class="title is-6">${title}</p>
+                <p class="subtitle is-6">Raiting: ${raiting}%</p>
+                <div class="content">
+                  <p>${content}</p>
+                  Release: <time datetime="${release}"><em>${release}</em></time>
+                </div>
+              </div>
+            </div>
+          </div>`;
+}
 //=====================================================================

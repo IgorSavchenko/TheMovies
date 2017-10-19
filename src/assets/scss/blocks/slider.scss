@@ -8,9 +8,13 @@
     margin: 50px auto;
     text-align: center;
     font-family: 'BigJohn';
-    font-size: 30px;
-    letter-spacing: 1rem;
     outline: none;
+    font-size: 20px;
+    letter-spacing: 0.5rem;
+    @include tablet-min {
+      font-size: 30px;
+      letter-spacing: 1rem;
+    }
   }
   &-item {
     display: flex;
@@ -25,7 +29,7 @@
     height: auto;
     object-fit: contain;
   }
-  &-text {
+  &-caption {
     position: absolute;
     left: 0;
     right: 0;
@@ -35,13 +39,30 @@
     color: $c-light;
     font-family: 'Raleway';
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
   }
+  &-title {
+    font-family: 'BigJohn';
+    font-size: 16px;
+    letter-spacing: 0.1rem;
+    @include tablet-min {
+      font-size: 20px;
+      letter-spacing: 0.2rem;
+    }
+    & + p {
+      font-family: 'SlimJoe';
+      font-size: 16px;
+      @include tablet-min {
+        font-size: 20px;
+      }
+    }
+  }
   &-navigation {
     position: absolute;
-    bottom: 5%;
+    bottom: 4%;
     left: 50%;
     transform: translateX(-50%);
     display: -webkit-flex;
@@ -61,7 +82,7 @@
     cursor: pointer;
     outline: none;
     &--active {
-      background-color: $c-green;
+      background-color: $c-text;
     }
   }
 }
