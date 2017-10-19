@@ -9136,9 +9136,18 @@ label.panel-block:hover {
 
 .slider {
   position: relative;
-  margin-top: 12px;
   background-color: #ffffff;
   object-fit: cover;
+  outline: none;
+}
+
+.slider-info {
+  margin: 50px auto;
+  text-align: center;
+  font-family: 'BigJohn';
+  font-size: 30px;
+  letter-spacing: 1rem;
+  outline: none;
 }
 
 .slider-item {
@@ -9151,8 +9160,8 @@ label.panel-block:hover {
 
 .slider-image {
   position: relative;
-  max-width: 50%;
-  height: 100%;
+  max-width: 100%;
+  height: auto;
   object-fit: contain;
 }
 
@@ -9160,7 +9169,7 @@ label.panel-block:hover {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 20px;
+  bottom: 10%;
   height: 80px;
   background-color: rgba(60, 60, 60, 0.75);
   color: #f5f5f5;
@@ -9219,6 +9228,11 @@ body {
   overflow: hidden;
   align-items: center;
   z-index: 1;
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+}
+
+.navbar:hover {
   opacity: 0.95;
 }
 
@@ -9258,12 +9272,21 @@ body {
   font-family: 'SlimJoe';
   letter-spacing: 2rem;
   padding-bottom: 50px;
+  margin-top: 150px;
+  line-height: 3rem;
+}
+
+@media (min-width: 768px) {
+  .hero .title {
+    margin-top: 0;
+  }
 }
 
 .hero .subtitle {
   font-family: 'Raleway';
   font-weight: 300;
   letter-spacing: 0.5rem;
+  line-height: 2rem;
 }
 
 .hero-link {
@@ -9277,7 +9300,7 @@ body {
 }
 
 .cards {
-  padding: 50px 0;
+  margin: 50px 0;
   outline: none;
 }
 
@@ -9296,12 +9319,13 @@ body {
 }
 
 .card-image {
+  background: linear-gradient(to right bottom, rgba(0, 212, 116, 0.79), rgba(0, 196, 160, 0.6), rgba(0, 230, 234, 0.5));
   overflow: hidden;
 }
 
 .card img {
   object-fit: cover;
-  transition: transform 5s ease;
+  transition: transform 10s ease;
 }
 
 .card .title {
@@ -9363,6 +9387,12 @@ body {
   }
 }
 
+.modal .content {
+  font-family: 'Raleway';
+  font-weight: 300;
+  font-size: 16px;
+}
+
 .modal-title {
   font-family: 'BigJohn';
   font-size: 18px;
@@ -9408,12 +9438,6 @@ body {
   }
 }
 
-@media (min-width: 1200px) {
-  .modal .box .media-left {
-    flex-shrink: 0.9;
-  }
-}
-
 .modal .level-item {
   display: inline-block;
   margin-right: 0.75rem;
@@ -9452,6 +9476,21 @@ body {
 .footer .icon {
   font-size: 1.5rem;
   color: #00d474;
+}
+
+.footer-link {
+  position: relative;
+  top: calc(-48px - 25px - 50px);
+  left: calc(100% - 50px);
+  width: 50px;
+  height: 50px;
+  background-color: rgba(60, 60, 60, 0.1);
+  border-radius: 50%;
+  transition: background-color 0.5s ease;
+}
+
+.footer-link:hover {
+  background-color: rgba(60, 60, 60, 0.2);
 }
 
 /*# sourceMappingURL=main.css.map */

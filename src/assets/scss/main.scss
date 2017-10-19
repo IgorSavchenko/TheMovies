@@ -53,7 +53,11 @@ body {
   overflow: hidden;
   align-items: center;
   z-index: 1;
-  opacity: 0.95;
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+  &:hover {
+    opacity: 0.95;
+  }
   &-brand img {
     max-height: 2.5rem;
   }
@@ -87,11 +91,17 @@ body {
     font-family: 'SlimJoe';
     letter-spacing: 2rem;
     padding-bottom: 50px;
+    margin-top: 150px;
+    line-height: 3rem;
+    @include tablet-min {
+      margin-top: 0;
+    }
   }
   & .subtitle {
     font-family: 'Raleway';
     font-weight: 300;
     letter-spacing: 0.5rem;
+    line-height: 2rem;
   }
   &-link {
     position: absolute;
@@ -105,7 +115,7 @@ body {
 }
 
 .cards {
-  padding: 50px 0;
+  margin: 50px 0;
   outline: none;
 }
 
@@ -122,13 +132,13 @@ body {
   }
   &-image {
     // padding: 15px;
-    // background: url("../img/TheMDB-square.png") center center no-repeat;
+    background: linear-gradient(to right bottom, rgba(0, 212, 116, 0.79), rgba(0, 196, 160, 0.6), rgba(0,230,234,0.5));
     // background-size: width: 200px; high: 300px;
     overflow: hidden;
   }
   & img {
     object-fit: cover;
-    transition: transform 5s ease;
+    transition: transform 10s ease;
   }
   & .title {
     font-family: 'BigJohn';
@@ -180,6 +190,11 @@ body {
       max-height: calc(100vh - 60px);
     }
   }
+  & .content {
+    font-family: 'Raleway';
+    font-weight: 300;
+    font-size: 16px;
+  }
   &-title {
     font-family: 'BigJohn';
     font-size: 18px;
@@ -211,7 +226,7 @@ body {
         flex-shrink: 0.8;
       }
       @include desktop-min {
-        flex-shrink: 0.9;
+        // flex-shrink: 0.8;
       }
     }
   }
@@ -247,5 +262,18 @@ body {
   & .icon {
     font-size: 1.5rem;
     color: $c-green;
+  }
+  &-link {
+    position: relative;
+    top: calc(-48px - 25px - 50px);
+    left: calc(100% - 50px);
+    width: 50px;
+    height: 50px;
+    background-color: rgba($c-text, 0.1);
+    border-radius: 50%;
+    transition: background-color 0.5s ease;
+    &:hover {
+      background-color: rgba($c-text, 0.2);
+    }
   }
 }
