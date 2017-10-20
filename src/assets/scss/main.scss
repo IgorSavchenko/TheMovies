@@ -82,11 +82,12 @@ body {
 .hero {
   position: relative;
   height: 100vh;
-  background-image: linear-gradient(to right bottom, rgba($c-green, 0.6), rgba($c-text, 0.5), rgba($c-light, 0.6)), url('../img/68886086-interstellar-wallpapers.jpg');
+  background-image: linear-gradient(to right bottom, rgba($c-green, 0.6), rgba($c-text, 0.5), rgba($c-light, 0.6)), url('../img/hero-bgd.jpg');
   // background-image: linear-gradient(to right bottom, rgba(0, 212, 116, 0.79), rgba(0, 196, 160, 0.3), rgba(0,230,234,0.1)), url('../img/interstellar3.jpg');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
+  overflow: hidden;
   & .title {
     font-family: 'SlimJoe';
     font-size: 1.5rem;

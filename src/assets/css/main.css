@@ -9324,10 +9324,11 @@ body {
 .hero {
   position: relative;
   height: 100vh;
-  background-image: linear-gradient(to right bottom, rgba(0, 212, 116, 0.6), rgba(60, 60, 60, 0.5), rgba(245, 245, 245, 0.6)), url("../img/68886086-interstellar-wallpapers.jpg");
+  background-image: linear-gradient(to right bottom, rgba(0, 212, 116, 0.6), rgba(60, 60, 60, 0.5), rgba(245, 245, 245, 0.6)), url("../img/hero-bgd.jpg");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
+  overflow: hidden;
 }
 
 .hero .title {
