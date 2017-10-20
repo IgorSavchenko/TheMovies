@@ -109,7 +109,7 @@ function createMasonry() {
   let imgLoad = imagesLoaded('.columns');
   let grid = document.querySelector('.columns');
   imgLoad.on( 'progress', function(instance, image) {
-    //creates Masonry object from .grid
+    //creates Masonry object from grid
     let msnry = new Masonry( grid, {
       // options
       itemSelector: ".column",
@@ -145,7 +145,7 @@ $("#search-button").click( () => {
     let requestURL = `/search/movie?api_key=${API_KEY}&query=${title}&page=1`;
     showMediaContent(requestURL);
     initModal();
-    // createMasonry();
+    createMasonry();
 });
 //=====================================================================
 //navbar menu links
@@ -174,7 +174,7 @@ $('.navbar-item').click(function(event) {
   if (requestData === 'watchNow') {return false;}
   showMediaContent(requestURL);
   initModal();
-  // createMasonry();
+  createMasonry();
 });
 //=====================================================================
 //show slider content with actual movies on load
