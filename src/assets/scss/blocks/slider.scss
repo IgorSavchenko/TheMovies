@@ -28,6 +28,9 @@
     max-width: 100%;
     height: auto;
     object-fit: contain;
+    img {
+      transition: filter 0.5s ease;
+    }
   }
   &-caption {
     position: absolute;
@@ -63,23 +66,24 @@
   & .arrow {
     position: absolute;
     width: 25px;
-    height: 25px;
+    height: 100%;
     top: 50%;
     transform: translateY(-50%);
     border: none;
-    border-radius: 50%;
+    // border-radius: 50%;
     // background-color: rgba($c-light, 0.5);
     background-color: transparent;
     color: $c-text;
     transition: color 0.5s ease;
     &:hover {
       color: $c-green;
+      cursor: pointer;
     }
     &--prev {
-      left: 5px;
+      left: 0;
     }
     &--next {
-      right: 5px;
+      right: 0;
     }
   }
   &-navigation {
@@ -104,9 +108,13 @@
     margin: 0 5px;
     background-color: $c-light;
     cursor: pointer;
-    outline: none;
+    // outline: none;
     &--active {
       background-color: $c-text;
     }
   }
+}
+//activated in main.js when mouse events take place on .slider img
+.is-blur {
+  filter: blur(10px);
 }

@@ -1,6 +1,7 @@
 //=====================================================================
 //navigation menu open/close
 const ACTIVE_CLASS = 'is-active';
+const BLUR_CLASS= 'is-blur';
 const HAMBURGER = $('.navbar-burger');
 const MENU = $('.navbar-menu');
 
@@ -53,6 +54,9 @@ import Siema from 'siema';
 function initSlider() {
   const MY_SIEMA = new Siema({
     selector: '.slider',
+    duration: 500,
+    easing: 'ease-out',
+    threshold: 100,
     perPage: 1,
     startIndex: 0,
     loop: true,
@@ -96,12 +100,33 @@ function initSlider() {
     this.selector.appendChild(this.nextArrow);
     // event handlers on buttons
     this.prevArrow.addEventListener('click', () => this.prev());
+    this.prevArrow.addEventListener('mouseenter', () => {
+      document.querySelectorAll('.slider img').forEach( (img) => {
+        img.classList.add('is-blur')
+      });
+    });
+    this.prevArrow.addEventListener('mouseleave', () => {
+      document.querySelectorAll('.slider img').forEach( (img) => {
+        img.classList.remove('is-blur')
+      });
+    });
     this.nextArrow.addEventListener('click', () => this.next());
+    this.nextArrow.addEventListener('mouseenter', () => {
+      document.querySelectorAll('.slider img').forEach( (img) => {
+        img.classList.add('is-blur')
+      });
+    });
+    this.nextArrow.addEventListener('mouseleave', () => {
+      document.querySelectorAll('.slider img').forEach( (img) => {
+        img.classList.remove('is-blur')
+      });
+    });
+
   }
   MY_SIEMA.addArrows();
 }
 //=====================================================================
-// init Masonry with element when all images in cards are Loaded
+// init Masonry with element when all images in cards are loaded
 import Masonry from 'masonry-layout';
 import imagesLoaded from 'imagesloaded';
 //create Masonry layout
@@ -123,11 +148,11 @@ function createMasonry() {
 //external database usage
 axios.defaults.baseURL = "https://api.themoviedb.org/3";
 const API_KEY = 'b38536f32716ab63ab8de5cb6ef96724';
-var BASE_IMG_URL;
-var IMG_SIZE_S;
-var IMG_SIZE_M;
-var IMG_SIZE_L;
-var IMG_SIZE_XL;
+let BASE_IMG_URL;
+let IMG_SIZE_S;
+let IMG_SIZE_M;
+let IMG_SIZE_L;
+let IMG_SIZE_XL;
 // get base configuration for images database
 axios.get(`/configuration?api_key=${API_KEY}`)
   .then(function (response) {
@@ -148,7 +173,7 @@ $("#search-button").click( () => {
     createMasonry();
 });
 //=====================================================================
-//navbar menu links
+//navbar menu links actions
 $('.navbar-item').click(function(event) {
   // event.preventDefault();
   //hide menu
@@ -171,14 +196,20 @@ $('.navbar-item').click(function(event) {
     // request example: https://api.themoviedb.org/3/movie/top_rated?api_key=<<api_key>>&language=en-US&page=1
     requestURL = `movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
   }
-  if (requestData === 'watchNow') {return false;}
+  if (requestData === 'watchNow') {
+    // return false;
+    // request example: https://api.themoviedb.org/3/movie/now_playing?api_key=<<api_key>>&language=en-US&page=1
+    requestURL = `movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`;
+  }
   showMediaContent(requestURL);
   initModal();
   createMasonry();
 });
 //=====================================================================
-//show slider content with actual movies on load
+//show slider content with actual movies onload
 showSliderContent();
+showMediaContent(`movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
+initModal();
 //=====================================================================
 //shows media content with search parameters
 function showMediaContent(request) {

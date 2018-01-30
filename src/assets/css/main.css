@@ -9172,6 +9172,10 @@ label.panel-block:hover {
   object-fit: contain;
 }
 
+.slider-image img {
+  transition: filter 0.5s ease;
+}
+
 .slider-caption {
   position: absolute;
   left: 0;
@@ -9215,11 +9219,10 @@ label.panel-block:hover {
 .slider .arrow {
   position: absolute;
   width: 25px;
-  height: 25px;
+  height: 100%;
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  border-radius: 50%;
   background-color: transparent;
   color: #3c3c3c;
   transition: color 0.5s ease;
@@ -9227,14 +9230,15 @@ label.panel-block:hover {
 
 .slider .arrow:hover {
   color: #00d474;
+  cursor: pointer;
 }
 
 .slider .arrow--prev {
-  left: 5px;
+  left: 0;
 }
 
 .slider .arrow--next {
-  right: 5px;
+  right: 0;
 }
 
 .slider-navigation {
@@ -9263,11 +9267,14 @@ label.panel-block:hover {
   margin: 0 5px;
   background-color: #f5f5f5;
   cursor: pointer;
-  outline: none;
 }
 
 .slider-button--active {
   background-color: #3c3c3c;
+}
+
+.is-blur {
+  filter: blur(10px);
 }
 
 * {
@@ -9468,7 +9475,6 @@ body {
 .modal-content {
   width: 560px;
   max-height: calc(100vh - 20px);
-  -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 768px) {
