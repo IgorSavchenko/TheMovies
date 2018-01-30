@@ -9475,6 +9475,7 @@ body {
 .modal-content {
   width: 560px;
   max-height: calc(100vh - 20px);
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 768px) {

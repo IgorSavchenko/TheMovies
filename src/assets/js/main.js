@@ -196,6 +196,7 @@ $('.navbar-item').click(function(event) {
     // request example: https://api.themoviedb.org/3/movie/top_rated?api_key=<<api_key>>&language=en-US&page=1
     requestURL = `movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`;
   }
+  //show actual videos in cinema
   if (requestData === 'watchNow') {
     // return false;
     // request example: https://api.themoviedb.org/3/movie/now_playing?api_key=<<api_key>>&language=en-US&page=1
@@ -205,11 +206,6 @@ $('.navbar-item').click(function(event) {
   initModal();
   createMasonry();
 });
-//=====================================================================
-//show slider content with actual movies onload
-showSliderContent();
-showMediaContent(`movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
-initModal();
 //=====================================================================
 //shows media content with search parameters
 function showMediaContent(request) {
@@ -351,4 +347,9 @@ let renderCardTemplate = (id, imgURL, title, raiting, content, release) => {
             </div>
           </div>`;
 }
+//=====================================================================
+//show content with actual movies onload
+showSliderContent();
+showMediaContent(`movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`);
+initModal();
 //=====================================================================

@@ -204,7 +204,7 @@ body {
     width: 560px;
     max-height: calc(100vh - 20px);
     // overflow-y: hidden;
-    //-webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch;
     @include tablet-min {
       width: 1024px;
       max-width: calc(100vw - 100px);
